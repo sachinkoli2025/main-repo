@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Catch the Box Game</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    #score {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    #box {
+      width: 50px;
+      height: 50px;
+      background-color: crimson;
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      cursor: pointer;
+      transition: top 0.3s ease, left 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Catch the Box!</h1>
+  <div id="score">Score: 0</div>
+  <div id="box"></div>
+
+  <script>
+    const box = document.getElementById('box');
+    const scoreDisplay = document.getElementById('score');
+    let score = 0;
+
+    function moveBox() {
+      const maxX = window.innerWidth - 50;
+      const maxY = window.innerHeight - 50;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      box.style.left = randomX + 'px';
+      box.style.top = randomY + 'px';
+    }
+
+    box.addEventListener('click', () => {
+      score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+      moveBox(); // Move immediately after clicking
+    });
+
+    // Move the box every 1 second
+    setInterval(moveBox, 1000);
+
+    // Initial position
+    moveBox();
+  </script>
+
+</body>
+</html>
